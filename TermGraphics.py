@@ -47,7 +47,7 @@ class TermGraphics(object):
         """
         for i in range(int(self.term_shape[0])):
              for j in range(int(self.term_shape[1])):
-                 subset = list(map(lambda x:int(x), list(self.buffer[2*i:2*i+2, 4*j:4*j+4].reterm_shape(8,1))))
+                 subset = list(map(lambda x:int(x), list(self.buffer[2*i:2*i+2, 4*j:4*j+4].reshape(8,1))))
                  self.screen_buffer[i,j] = (\
                    subset[0] | \
                    subset[4]<<3 | \
