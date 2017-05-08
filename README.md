@@ -89,8 +89,10 @@ time.sleep(5)
 
 # Planned features
 
+* Reduce bandwidth by only drawing parts of the screen that have changed
 * Draw text at (x,y)
 * Draw color images at (x,y)
 * Both inline and full-screen support
 * Multiple canvases per screen
 * 256-color terminal support
+* Separate ASCII and Extended ASCII modes
