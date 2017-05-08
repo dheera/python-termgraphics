@@ -63,6 +63,9 @@ class TermGraphics(object):
         Draw a point at points = (x,y) where x is the column number, y is the row number, and (0,0)
         is the top-left corner of the screen.
         """
+        if type(point[0]) is not int or type(point[1]) is not int:
+            point = (int(point[0]), int(point[1]))
+
         if point[0] >= 0 and point[1] >= 0 and point[0] < self.shape[0] and point[1] < self.shape[1]:
             index = ((point[0] >> 1) + (point[1] >> 2) * self.term_shape[0])
             self.buffer[index] = self.buffer[index] | \
@@ -70,7 +73,32 @@ class TermGraphics(object):
             self.colors[index] = self.current_color
 
     def line(self, point0, point1):
-        print("Not yet supported")
+        """
+        Draw a line between point0 = (x0, y0) and point1 = (x1, y1).
+        """
+        if point1[0] == point0[0]:
+            if point0[1] < point1[1]:
+                for y in range(point0[1], point1[1]):
+                    self.point((point0[0], y))
+            else:
+                for y in range(point1[1], point0[1]):
+                    self.point((point0[0], y))
+            return
+        slope = (point1[1] - point0[1]) / (point1[0] - point0[0])
+        if abs(slope) <= 1:
+            if point0[0] < point1[0]:
+                for x in range(point0[0], point1[0]):
+                     self.point((x, point0[1] + slope*(x - point0[0])))
+            else:
+                for x in range(point1[0], point0[0]):
+                     self.point((x, point0[1] + slope*(x - point0[0])))
+        else:
+            if point0[1] < point1[1]:
+                for y in range(point0[1], point1[1]):
+                     self.point((point0[0] + (y - point0[1])/slope, y))
+            else:
+                for y in range(point1[1], point0[1]):
+                     self.point((point0[0] + (y - point0[1])/slope, y))
         return
 
     def draw(self):
