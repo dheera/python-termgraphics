@@ -48,6 +48,11 @@ time.sleep(5)
 It also supports changing colors as per ANSI terminal specifications. However, since it is only possible to set the color of a full character, if 2 points of different colors occur in the same character block, the latter color will be used.
 
 ```
+#!/usr/bin/env python3
+import math
+import time
+import TermGraphics
+
 g = TermGraphics.TermGraphics()
 
 g.clear()
@@ -86,3 +91,13 @@ time.sleep(5)
 ```
 
 ![screenshot](/screenshot2.png?raw=true "screenshot")
+
+# Planned features
+
+* Reduce bandwidth by only drawing parts of the screen that have changed
+* Draw text at (x,y)
+* Draw color images at (x,y)
+* Both inline and full-screen support
+* Multiple canvases per screen
+* 256-color terminal support
+* Separate ASCII and Extended ASCII modes
