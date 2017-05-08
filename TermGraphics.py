@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import math
 import os
 import sys
 import time
+
+if sys.version_info >= (3,):
+    unichr = chr
 
 COLOR_BLACK = 0
 COLOR_RED = 1
@@ -134,7 +140,7 @@ class TermGraphics(object):
                     current_draw_color = self.colors[index]
                     sys.stdout.write("\033[3" + str(current_draw_color) + "m")
                 if self.mode == MODE_BRAILLE:
-                    sys.stdout.write(chr(0x2800 + self.buffer[index]))
+                    sys.stdout.write(unichr(0x2800 + self.buffer[index]))
                 elif self.mode == MODE_EASCII:
                     sys.stdout.write(TABLE_EASCII[self.buffer[index]])
         sys.stdout.write("\033[37m")
