@@ -92,6 +92,34 @@ time.sleep(5)
 
 ![screenshot](/screenshot2.png?raw=true "screenshot")
 
+You can also display images (preliminary support):
+```
+#!/usr/bin/env python3
+
+import TermGraphics
+from PIL import Image, ImageOps
+import requests
+from io import BytesIO
+import time
+
+g = TermGraphics.TermGraphics()
+
+def get_image(url = 'https://imgs.xkcd.com/comics/estimation.png'):
+    response = requests.get(url)
+    img = Image.open(BytesIO(response.content))
+    return img
+
+if __name__ == "__main__":
+    img = get_image()
+    img = ImageOps.invert(img).resize((200,280), Image.NEAREST)
+    g.image(list(img.getdata()), img.width, img.height, (0, 0), image_type = TermGraphics.IMAGE_UINT8)
+
+g.draw()
+time.sleep(2)
+```
+
+![screenshot](/screenshot3.png?raw=true "screenshot")
+
 # Planned features
 
 * Reduce bandwidth by only drawing parts of the screen that have changed
