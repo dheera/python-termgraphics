@@ -72,6 +72,13 @@ class TermGraphics(object):
               UNICODE_BRAILLE_MAP[(point[0] & 0b1) | ((point[1] & 0b11) << 1)]
             self.colors[index] = self.current_color
 
+    def poly(self, points):
+        """
+        Draws lines between a list of points = [(x0,y0), (x1,y1), (x2,y2), ...].
+        """
+        for i in range(1, len(points)):
+            self.line(points[i-1], points[i])
+
     def line(self, point0, point1):
         """
         Draw a line between point0 = (x0, y0) and point1 = (x1, y1).
