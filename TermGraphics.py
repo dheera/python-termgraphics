@@ -9,7 +9,7 @@ import time
 MODE_BRAILLE = 0
 MODE_EASCII = 2
 
-TABLE_EASCII = " '-'.*.|~~/F([-\\-~/>-&'\"\"~))//.\\\\\\_LLL'\"<C-=CC|)-\\vD=D|Y|Y|)AH.!i!.ii|/\"/F/Fff//rkfPrkJJ/P/P/P/?>brr>kl>&&*=fF/)vb/PPDJ)19/2/R.\\\\\\\\\\\\(=T([(((C=3-5cSct!919|7Ce,\\\\\\_\\\\\\i919i9(C|)\\\\+tv\\|719|7@9???L_LLL_=6[CEC[=;==c2ctJ]d=¿Z6E/_;bsbsbj]SSd=66jj]bddsDJ]j]d]d8"
+TABLE_EASCII = " '-'.*.|'~/~/F//-\\-~/>-&'\"\"\"/)//.\\\\\\_LLL'\"<C-=CC:\\-\\vD=D|Y|Y|)AH.!i!.ii|/\"/F/Fff//rkfPrkJJ/P/P/P//>brr>kl>&&*=fF/)vb/PPDJ)19/2/R.\\\\\\\\\\\\(=T([(((C=3-5cSct!919|7Ce,\\\\\\_\\\\\\i919i9(C|)\\\\+tv\\|719|7@9_L=L_LLL_=6[CEC[=;==c2ctJ]d=¿Z6E/\\;bsbsbj]SSd=66jj]bddsbJ]j]d]d8"
 
 class TermGraphics(object):
     def __init__(self, mode = MODE_BRAILLE):

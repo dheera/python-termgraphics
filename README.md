@@ -21,5 +21,18 @@ time.sleep(5)
 
 ```
 
-![screenshot](/screenshot.png?raw=true "screenshot")
+![screenshot](/screenshot0.png?raw=true "screenshot")
+
+It also supports using ASCII art, in case you are inside a screen or something else that doesn't
+support Unicode terminals.
+
+```
+#!/usr/bin/env python3
+import time
+import TermGraphics
+
+g = TermGraphics.TermGraphics(mode = TermGraphics.MODE_EASCII)
+```
+
+![screenshot](/screenshot1.png?raw=true "screenshot")
 
