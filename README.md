@@ -86,3 +86,11 @@ time.sleep(5)
 ```
 
 ![screenshot](/screenshot2.png?raw=true "screenshot")
+
+# Planned features
+
+* Draw text at (x,y)
+* Draw color images at (x,y)
+* Both inline and full-screen support
+* Multiple canvases per screen
+* 256-color terminal support
