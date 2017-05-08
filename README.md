@@ -48,6 +48,11 @@ time.sleep(5)
 It also supports changing colors as per ANSI terminal specifications. However, since it is only possible to set the color of a full character, if 2 points of different colors occur in the same character block, the latter color will be used.
 
 ```
+#!/usr/bin/env python3
+import math
+import time
+import TermGraphics
+
 g = TermGraphics.TermGraphics()
 
 g.clear()
