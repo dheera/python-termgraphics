@@ -1,4 +1,4 @@
-# TermGraphics.py
+# termgraphics.py
 
 A library to draw graphics in a terminal using Unicode braille art.
 
@@ -7,7 +7,7 @@ Sample usage:
 ```
 #!/usr/bin/env python3
 import time
-from TermGraphics import TermGraphics
+from termgraphics import termgraphics
 
 g = TermGraphics()
 
@@ -29,9 +29,9 @@ support Unicode terminals.
 ```
 #!/usr/bin/env python3
 import time
-import TermGraphics
+import termgraphics
 
-g = TermGraphics.TermGraphics(mode = TermGraphics.MODE_EASCII)
+g = termgraphics.TermGraphics(mode = termgraphics.MODE_EASCII)
 
 g.clear()
 
@@ -51,22 +51,22 @@ It also supports changing colors as per ANSI terminal specifications. However, s
 #!/usr/bin/env python3
 import math
 import time
-import TermGraphics
+import termgraphics
 
-g = TermGraphics.TermGraphics()
+g = termgraphics.TermGraphics()
 
 g.clear()
 
 # draw axes
 
-g.set_color(TermGraphics.COLOR_WHITE)
+g.set_color(termgraphics.COLOR_WHITE)
 
 g.line((0, g.shape[1]/2), (g.shape[0], g.shape[1]/2))
 g.line((g.shape[0]/2, 0), (g.shape[0]/2, g.shape[1]))
 
 # draw a sin in red
 
-g.set_color(TermGraphics.COLOR_RED)
+g.set_color(termgraphics.COLOR_RED)
 
 points = []
 for x in range(g.shape[0]):
@@ -77,7 +77,7 @@ g.poly(points)
 
 # draw a cos in blue
 
-g.set_color(TermGraphics.COLOR_BLUE)
+g.set_color(termgraphics.COLOR_BLUE)
 
 points = []
 for x in range(g.shape[0]):
@@ -96,13 +96,13 @@ You can also display images (preliminary support):
 ```
 #!/usr/bin/env python3
 
-import TermGraphics
+import termgraphics
 from PIL import Image, ImageOps
 import requests
 from io import BytesIO
 import time
 
-g = TermGraphics.TermGraphics()
+g = termgraphics.TermGraphics()
 
 def get_image(url = 'https://imgs.xkcd.com/comics/estimation.png'):
     response = requests.get(url)
@@ -112,7 +112,7 @@ def get_image(url = 'https://imgs.xkcd.com/comics/estimation.png'):
 if __name__ == "__main__":
     img = get_image()
     img = ImageOps.invert(img).resize((200,280), Image.NEAREST)
-    g.image(list(img.getdata()), img.width, img.height, (0, 0), image_type = TermGraphics.IMAGE_UINT8)
+    g.image(list(img.getdata()), img.width, img.height, (0, 0), image_type = termgraphics.IMAGE_UINT8)
 
 g.draw()
 time.sleep(2)
