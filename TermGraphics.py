@@ -101,6 +101,15 @@ class TermGraphics(object):
                      self.point((point0[0] + (y - point0[1])/slope, y))
         return
 
+    def rect(self, point0, point1):
+        """
+        Draw a rectangle between corners point0 = (x0, y0) and point1 = (x1, y1).
+        """
+        self.line((point0[0], point0[1]), (point0[0], point1[1]))
+        self.line((point0[0], point1[1]), (point1[0], point1[1]))
+        self.line((point1[0], point1[1]), (point1[0], point0[1]))
+        self.line((point1[0], point0[1]), (point0[0], point0[1]))
+
     def draw(self):
         """
         Shows the graphics buffer on the screen. Must be called in order to see output.
