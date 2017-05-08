@@ -6,8 +6,14 @@ import numpy
 import sys
 import time
 
+MODE_BRAILLE = 0
+MODE_ASCII = 1
+MODE_EASCII = 2
+
+TABLE_EASCII = " '-'.*.|~~/F([-\\-~/>-&'\"\"~))//.\\\\\\_LLL'\"<C-=CC|)-\\vD=D|Y|Y|)AH.!i!.ii|/\"/F/Fff//rkfPrkJJ/P/P/P/?>brr>kl>&&*=fF/)vb/PPDJ)19/2/R.\\\\\\\\\\\\(=T([(((C=3-5cSct!919|7Ce,\\\\\\_\\\\\\i919i9(C|)\\\\+tv\\|719|7@9???L_LLL_=6[CEC[=;==c2ctJ]d=¿Z6E/_;bsbsbj]SSd=66jj]bddsDJ]j]d]d8"
+
 class TermGraphics(object):
-    def __init__(self):
+    def __init__(self, mode = MODE_BRAILLE):
         """
         Initialization. This class takes no arguments.
         """
@@ -15,6 +21,7 @@ class TermGraphics(object):
         self.shape = (self.term_shape[0]*2, self.term_shape[1]*4)
         self.buffer = numpy.zeros(self.shape, dtype = numpy.uint8)
         self.screen_buffer = numpy.zeros(self.term_shape, dtype = numpy.uint8)
+        self.mode = mode
 
     def clear(self):
         """
@@ -64,7 +71,10 @@ class TermGraphics(object):
         for j in range(self.term_shape[1]):
             sys.stdout.write("\033[" + str(j+1) + ";1H")
             for i in range(self.term_shape[0]):
-                sys.stdout.write(chr(0x2800 + self.screen_buffer[i,j]))
+                if self.mode == MODE_BRAILLE:
+                    sys.stdout.write(chr(0x2800 + self.screen_buffer[i,j]))
+                elif self.mode == MODE_EASCII:
+                    sys.stdout.write(TABLE_EASCII[self.screen_buffer[i,j]])
         sys.stdout.flush()
 
 
