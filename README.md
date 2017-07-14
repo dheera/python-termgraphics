@@ -92,7 +92,7 @@ time.sleep(5)
 
 ![screenshot](/screenshot2.png?raw=true "screenshot")
 
-You can also display images (preliminary support):
+You can also display monochrome images:
 ```
 #!/usr/bin/env python3
 
@@ -119,6 +119,32 @@ time.sleep(2)
 ```
 
 ![screenshot](/screenshot3.png?raw=true "screenshot")
+
+There is also preliminary support for RGB images but these do not use the Braille characters because it is not possible to set different colors for multiple portions of the same character cell. Hence the image needs to be resized by a factor of 2 in the X direction and 4 in the Y direction:
+
+```
+#!/usr/bin/env python3
+
+import termgraphics
+from PIL import Image, ImageOps
+import requests
+from io import BytesIO
+import time
+
+g = termgraphics.TermGraphics()
+
+def get_image(url = 'https://devblogs.nvidia.com/parallelforall/wp-content/uploads/2016/07/cute.jpg'):
+    response = requests.get(url)
+    img = Image.open(BytesIO(response.content))
+    return img
+
+if __name__ == "__main__":
+    img = get_image().resize((200//2,150//4), Image.NEAREST)
+    print(img)
+    g.image(list(img.getdata()), img.width, img.height, (0, 0), image_type = termgraphics.IMAGE_RGB_2X4)
+```
+
+![screenshot](/screenshot4.png?raw=true "screenshot")
 
 # Planned features
 

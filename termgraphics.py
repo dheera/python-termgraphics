@@ -24,16 +24,16 @@ COLOR_SUPPORT_1 = 0
 COLOR_SUPPORT_16 = 1
 COLOR_SUPPORT_256 = 2
 
-MODE_BRAILLE = 0
+MODE_UNICODE = 0
 MODE_EASCII = 2
 
 IMAGE_MONOCHROME = 0
 IMAGE_UINT8 = 1
-IMAGE_RGB = 2
+IMAGE_RGB_2X4 = 2
 
 TABLE_EASCII = " '-'.*.|'~/~/F//-\\-~/>-&'\"\"\"/)//.\\\\\\_LLL'\"<C-=CC:\\-\\vD=D|Y|Y|)AH.!i!.ii|/\"/F/Fff//rkfPrkJJ/P/P/P//>brr>kl>&&*=fF/)vb/PPDJ)19/2/R.\\\\\\\\\\\\(=T([(((C=3-5cSct!919|7Ce,\\\\\\_\\\\\\i919i9(C|)\\\\+tv\\|719|7@9_L=L_LLL_=6[CEC[=;==c2ctJ]d=¿Z6E/\\;bsbsbj]SSd=66jj]bddsbJ]j]d]d8"
 
-UNICODE_BRAILLE_MAP= [ \
+UNICODE_UNICODE_MAP= [ \
     0b00000001,
     0b00001000,
     0b00000010,
@@ -45,7 +45,7 @@ UNICODE_BRAILLE_MAP= [ \
 ]
 
 class TermGraphics(object):
-    def __init__(self, mode = MODE_BRAILLE):
+    def __init__(self, mode = MODE_UNICODE):
         """
         Initialization. This class takes no arguments.
         """
@@ -96,10 +96,10 @@ class TermGraphics(object):
             index = ((point[0] >> 1) + (point[1] >> 2) * self.term_shape[0])
             self.buffer[2*index] = 0x28
             if clear_block:
-                self.buffer[2*index+1] = UNICODE_BRAILLE_MAP[(point[0] & 0b1) | ((point[1] & 0b11) << 1)]
+                self.buffer[2*index+1] = UNICODE_UNICODE_MAP[(point[0] & 0b1) | ((point[1] & 0b11) << 1)]
             else:
                 self.buffer[2*index+1] = self.buffer[2*index+1] | \
-                  UNICODE_BRAILLE_MAP[(point[0] & 0b1) | ((point[1] & 0b11) << 1)]
+                  UNICODE_UNICODE_MAP[(point[0] & 0b1) | ((point[1] & 0b11) << 1)]
             self.colors[3*index:3*index+3] = self.current_color
 
     def text(self, text, point):
@@ -173,6 +173,20 @@ class TermGraphics(object):
                     if data[j*width + i] > 127:
                         self.point((point[0] + i, point[1] + j))
 
+        elif image_type == IMAGE_RGB_2X4 and self.mode == MODE_UNICODE:
+            for i in range(width):
+                for j in range(height):
+                    index = i + j*self.term_shape[0]
+                    self.colors[3*index:3*index+3] = data[j*width + i]
+                    self.buffer[2*index:2*index+2] = 0x25, 0x88
+
+        elif image_type == IMAGE_RGB_2X4 and self.mode == MODE_UNICODE:
+            for i in range(width):
+                for j in range(height):
+                    index = i + j*self.term_shape[0]
+                    self.colors[3*index:3*index+3] = data[j*width + i]
+                    self.buffer[2*index:2*index+2] = 0x00, 0x88
+
     def draw(self):
         """
         Shows the graphics buffer on the screen. Must be called in order to see output.
@@ -195,10 +209,15 @@ class TermGraphics(object):
                 if self.buffer_text[index]:
                     sys.stdout.write(chr(self.buffer_text[index]))
                 else:
-                    if self.mode == MODE_BRAILLE:
+                    if self.mode == MODE_UNICODE:
                         sys.stdout.write(unichr(self.buffer[2*index]<<8 | self.buffer[2*index+1]))
                     elif self.mode == MODE_EASCII:
-                        sys.stdout.write(TABLE_EASCII[self.buffer[2*index + 1]])
+                        if self.buffer[2*index] == 0x28:
+                            sys.stdout.write(TABLE_EASCII[self.buffer[2*index + 1]])
+                        elif self.buffer[2*index] == 0x00 and self.buffer[2*index + 1] != 0x00:
+                            sys.stdout.write(TABLE_EASCII[self.buffer[2*index + 1]])
+                        else:
+                            sys.stdout.write(0x20)
         sys.stdout.write("\033[37m")
         sys.stdout.flush()
 
