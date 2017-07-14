@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# By Dheera Venkatraman [ http://dheera.net ]
+# Released under the MIT license.
+# https://github.com/dheera/python-termgraphics
+
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import math
