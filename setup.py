@@ -2,6 +2,6 @@ from setuptools import setup
 
 setup(
     name='termgraphics',
-    version='0.1',
-    scripts=['termgraphics.py']
+    version='0.2',
+    py_modules=['termgraphics']
 )
