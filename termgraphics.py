@@ -63,7 +63,7 @@ class TermGraphics(object):
         else:
           self.color_support = COLOR_SUPPORT_16
 
-    def _rgb_to_8(rgb):
+    def _rgb_to_8(self, rgb):
         return (rgb[2] > 127) << 2 | (rgb[1] > 127)<<1 | (rgb[0] > 127)
 
     def clear(self):
