@@ -4,9 +4,6 @@
 # By Dheera Venkatraman [ http://dheera.net ]
 # Released under the MIT license.
 
-# Modified to use numpy for more efficient processing
-# Original non-numpy version at https://github.com/dheera/python-termgraphics
-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import math
