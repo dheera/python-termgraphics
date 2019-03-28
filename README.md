@@ -112,7 +112,7 @@ def get_image(url = 'https://imgs.xkcd.com/comics/estimation.png'):
 if __name__ == "__main__":
     img = get_image()
     img = ImageOps.invert(img).resize((200,280), Image.NEAREST)
-    g.image(list(img.getdata()), img.width, img.height, (0, 0), image_type = termgraphics.IMAGE_UINT8)
+    g.image(list(img.getdata()), img.width, img.height, (0, 0), image_type = termgraphics.IMAGE_MONOCHROME)
 
 g.draw()
 time.sleep(2)

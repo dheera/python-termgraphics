@@ -2,6 +2,7 @@ from setuptools import setup
 
 setup(
     name='termgraphics',
-    version='0.2',
+    version='1.0.0',
+    install_requires=['numpy'],
     py_modules=['termgraphics']
 )
