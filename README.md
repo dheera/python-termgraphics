@@ -1,6 +1,6 @@
 # termgraphics.py
 
-A library to draw graphics in a terminal using Unicode braille art.
+A library to draw graphics in a terminal using Unicode braille art. Requires numpy.
 
 Sample usage:
 
@@ -146,12 +146,3 @@ if __name__ == "__main__":
 
 ![screenshot](/screenshot4.png?raw=true "screenshot")
 
-# Planned features
-
-* Reduce bandwidth by only drawing parts of the screen that have changed
-* Draw text at (x,y)
-* Draw color images at (x,y)
-* Both inline and full-screen support
-* Multiple canvases per screen
-* 256-color terminal support
-* Separate ASCII and Extended ASCII modes
