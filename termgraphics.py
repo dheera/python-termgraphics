@@ -4,9 +4,8 @@
 # By Dheera Venkatraman [ http://dheera.net ]
 # Released under the MIT license.
 
-__version__ = "1.1.0"
-
 from __future__ import absolute_import, division, print_function, unicode_literals
+__version__ = "1.1.0"
 
 import math
 import numpy as np
