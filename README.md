@@ -12,7 +12,7 @@ Sample usage:
 ```
 #!/usr/bin/env python3
 import time
-from termgraphics import termgraphics
+from termgraphics import TermGraphics
 
 g = TermGraphics()
 
