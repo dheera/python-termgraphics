@@ -147,6 +147,7 @@ if __name__ == "__main__":
     img = get_image().resize((200//2,150//4), Image.NEAREST)
     print(img)
     g.image(list(img.getdata()), img.width, img.height, (0, 0), image_type = termgraphics.IMAGE_RGB_2X4)
+    g.draw()
 ```
 
 ![screenshot](/screenshot4.png?raw=true "screenshot")
