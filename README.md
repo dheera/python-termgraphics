@@ -2,6 +2,11 @@
 
 A library to draw graphics in a terminal using Unicode braille art. Requires numpy.
 
+Installation:
+```
+pip3 install termgraphics
+```
+
 Sample usage:
 
 ```
